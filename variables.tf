@@ -8,6 +8,10 @@ variable region {
   default = "europe-west-1"
 }
 
+variable rule_name {
+  default = "reachable"
+}
+
 variable service_account_file {
   default = ""
 }

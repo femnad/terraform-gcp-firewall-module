@@ -10,6 +10,7 @@ data "http" "ipinfo" {
 }
 
 resource "google_compute_firewall" "self-reachable" {
+  name = var.rule_name
   network = var.network
 
   dynamic "allow" {
