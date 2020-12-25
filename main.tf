@@ -30,7 +30,7 @@ resource "google_compute_firewall" "world-reachable" {
   network = var.network
 
   dynamic "allow" {
-    for_each = var.self_reachable
+    for_each = var.world_reachable
 
     content {
       protocol = allow.value
