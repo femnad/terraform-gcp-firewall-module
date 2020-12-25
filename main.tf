@@ -38,5 +38,5 @@ resource "google_compute_firewall" "world-reachable" {
     }
   }
 
-  source_ranges = "0.0.0.0/0"
+  source_ranges = ["0.0.0.0/0"]
 }
