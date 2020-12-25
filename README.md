@@ -13,3 +13,5 @@ self_reachable = {
 ```
 
 * `project`: A GCP project to use
+
+* `network`: The network for which to add the rule(s)

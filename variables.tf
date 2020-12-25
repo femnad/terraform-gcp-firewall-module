@@ -2,6 +2,8 @@ variable project {}
 
 variable self_reachable {}
 
+variable network {}
+
 variable region {
   default = "europe-west-1"
 }
