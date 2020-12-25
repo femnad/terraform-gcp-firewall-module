@@ -1,6 +1,12 @@
 variable project {}
 
-variable self_reachable {}
+variable self_reachable {
+  default = {}
+}
+
+variable world_reachable {
+  default = {}
+}
 
 variable network {}
 
