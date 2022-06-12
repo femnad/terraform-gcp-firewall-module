@@ -22,7 +22,7 @@ self_reachable = {
 * `world_reachable`: A mapping of ports to protocol which should be reachable from everywhere
 
 ```
-self_reachable = {
+world_reachable = {
   "80,443" = "tcp"
 }
 ```

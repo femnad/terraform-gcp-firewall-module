@@ -9,12 +9,18 @@ data "http" "ipinfo" {
   url = "https://ipinfo.io/json"
 }
 
+locals {
+  default_allow = {
+    "" = "icmp"
+  }
+}
+
 resource "google_compute_firewall" "self-reachable" {
   name = "self-reachable"
   network = var.network
 
   dynamic "allow" {
-    for_each = var.self_reachable
+    for_each = length(var.self_reachable) > 0 ? var.self_reachable : local.default_allow
 
     content {
       protocol = allow.value
@@ -30,7 +36,7 @@ resource "google_compute_firewall" "world-reachable" {
   network = var.network
 
   dynamic "allow" {
-    for_each = var.world_reachable
+    for_each = length(var.world_reachable) > 0 ? var.world_reachable : local.default_allow
 
     content {
       protocol = allow.value
