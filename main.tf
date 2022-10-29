@@ -13,6 +13,14 @@ locals {
   default_allow = {
     "" = "icmp"
   }
+  public_ip = jsondecode(data.http.ipinfo.body).ip
+  prefix = format("%s/%s", local.public_ip, var.ip_mask)
+  ips = {
+    for host in range(var.ip_num) :
+    "range" => {
+      ip = cidrhost(local.prefix, host)
+    }...
+  }
 }
 
 resource "google_compute_firewall" "self-reachable" {
@@ -28,7 +36,7 @@ resource "google_compute_firewall" "self-reachable" {
     }
   }
 
-  source_ranges = [format("%s/32", jsondecode(data.http.ipinfo.body).ip)]
+  source_ranges = [for ip in local.ips.range: ip.ip]
 }
 
 resource "google_compute_firewall" "world-reachable" {

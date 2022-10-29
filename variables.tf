@@ -25,3 +25,11 @@ variable service_account_file {
 variable zone {
   default = "europe-west1-c"
 }
+
+variable ip_mask {
+  default = 32
+}
+
+variable ip_num {
+  default = 1
+}
