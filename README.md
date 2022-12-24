@@ -31,6 +31,8 @@ world_reachable = {
 
 * `ip_num`: Number of IPs to allow based on the prefix. Default is 1, so only your public IP will be allowed. Needs to agree with `ip_mask`, as in the requested number of IP should be available in the prefix.<sup>[Why?](#why-ip_mask-and-ip_num)</sup>
 
+* `prefix`: A string for prefixing firewall rule names, if not provided a random prefix will be selected.
+
 ## Why `ip_mask` and `ip_num`?
 
 This module uses your public IP to determine allowed source ranges for the `self_reachable` mapping. If you're on a connection which results in having multiple public IPs then may want to give a slightly bigger range than a `/32`. In order to that based on the public IP, `ip_mask` and `ip_num` are utilized to derive multiple public IPs.

@@ -14,17 +14,21 @@ locals {
     "" = "icmp"
   }
   public_ip = jsondecode(data.http.ipinfo.body).ip
-  prefix = format("%s/%s", local.public_ip, var.ip_mask)
+  ip_prefix = format("%s/%s", local.public_ip, var.ip_mask)
   ips = {
     for host in range(var.ip_num) :
     "range" => {
-      ip = cidrhost(local.prefix, host)
+      ip = cidrhost(local.ip_prefix, host)
     }...
   }
+  prefix = length(var.prefix) > 0 ? var.prefix : "${random_pet.prefix.id}"
+}
+
+resource "random_pet" "prefix" {
 }
 
 resource "google_compute_firewall" "self-reachable" {
-  name = "self-reachable"
+  name = "${local.prefix}-self-reachable"
   network = var.network
 
   dynamic "allow" {
@@ -40,7 +44,7 @@ resource "google_compute_firewall" "self-reachable" {
 }
 
 resource "google_compute_firewall" "world-reachable" {
-  name = "world-reachable"
+  name = "${local.prefix}-world-reachable"
   network = var.network
 
   dynamic "allow" {

@@ -33,3 +33,7 @@ variable ip_mask {
 variable ip_num {
   default = 1
 }
+
+variable prefix {
+  default = ""
+}
