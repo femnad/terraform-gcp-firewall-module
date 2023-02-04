@@ -13,7 +13,7 @@ locals {
   default_allow = {
     "" = "icmp"
   }
-  public_ip = jsondecode(data.http.ipinfo.body).ip
+  public_ip = jsondecode(data.http.ipinfo.request_body).ip
   ip_prefix = format("%s/%s", local.public_ip, var.ip_mask)
   ips = {
     for host in range(var.ip_num) :
