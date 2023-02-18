@@ -36,7 +36,7 @@ resource "google_compute_firewall" "self-reachable" {
 
     content {
       protocol = allow.value
-      ports    = split(",", allow.key)
+      ports    = allow.value == "icmp" ? null : split(",", allow.key)
     }
   }
 
