@@ -1,39 +1,43 @@
-variable project {}
+variable "project" {}
 
-variable self_reachable {
+variable "self_reachable" {
   default = {}
 }
 
-variable world_reachable {
-  default = {}
+variable "world_reachable" {
+  type = object({
+    remote_ips = optional(list(string))
+    port_map = map(string)
+  })
+  default = null
 }
 
-variable network {}
+variable "network" {}
 
-variable region {
+variable "region" {
   default = "europe-west-1"
 }
 
-variable rule_name {
+variable "rule_name" {
   default = "reachable"
 }
 
-variable service_account_file {
+variable "service_account_file" {
   default = ""
 }
 
-variable zone {
+variable "zone" {
   default = "europe-west1-c"
 }
 
-variable ip_mask {
+variable "ip_mask" {
   default = 32
 }
 
-variable ip_num {
+variable "ip_num" {
   default = 1
 }
 
-variable prefix {
+variable "prefix" {
   default = ""
 }

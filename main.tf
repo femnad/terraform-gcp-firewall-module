@@ -28,7 +28,7 @@ resource "random_pet" "prefix" {
 }
 
 resource "google_compute_firewall" "self-reachable" {
-  name = "${local.prefix}-self-reachable"
+  name    = "${local.prefix}-self-reachable"
   network = var.network
 
   dynamic "allow" {
@@ -40,15 +40,16 @@ resource "google_compute_firewall" "self-reachable" {
     }
   }
 
-  source_ranges = [for ip in local.ips.range: ip.ip]
+  source_ranges = [for ip in local.ips.range : ip.ip]
 }
 
 resource "google_compute_firewall" "world-reachable" {
-  name = "${local.prefix}-world-reachable"
+  name    = "${local.prefix}-world-reachable"
   network = var.network
+  count   = var.world_reachable != null ? 1 : 0
 
   dynamic "allow" {
-    for_each = length(var.world_reachable) > 0 ? var.world_reachable : local.default_allow
+    for_each = var.world_reachable.port_map
 
     content {
       protocol = allow.value
@@ -56,5 +57,5 @@ resource "google_compute_firewall" "world-reachable" {
     }
   }
 
-  source_ranges = length(var.world_reachable) > 0 ? ["0.0.0.0/0"] : ["127.0.0.1/32"]
+  source_ranges = var.world_reachable.remote_ips == null ? ["0.0.0.0/0"] : var.world_reachable.remote_ips
 }
