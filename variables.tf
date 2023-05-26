@@ -1,5 +1,3 @@
-variable "project" {}
-
 variable "self_reachable" {
   default = {}
 }

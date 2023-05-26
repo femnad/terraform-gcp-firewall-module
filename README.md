@@ -4,9 +4,6 @@ A module for lazy GCP firewall rule creation via Terraform.
 
 ## Required Input Variables
 
-
-* `project`: A GCP project to use
-
 * `network`: The network for which to add the rule(s)
 
 ## Optional Input Variables
