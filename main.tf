@@ -21,7 +21,7 @@ resource "random_pet" "prefix" {
 }
 
 resource "google_compute_firewall" "self-reachable" {
-  name    = "${local.prefix}-self-reachable"
+  name    = coalesce(var.self_reachable_name, "${local.prefix}-self-reachable")
   network = var.network
 
   dynamic "allow" {
@@ -37,7 +37,7 @@ resource "google_compute_firewall" "self-reachable" {
 }
 
 resource "google_compute_firewall" "world-reachable" {
-  name    = "${local.prefix}-world-reachable"
+  name    = coalasce(var.world_reachable_name, "${local.prefix}-world-reachable")
   network = var.network
   count   = var.world_reachable != null ? 1 : 0
 

@@ -27,3 +27,15 @@ variable "ip_num" {
 variable "prefix" {
   default = ""
 }
+
+variable "self_reachable_name" {
+  type        = string
+  default     = null
+  description = "Name of firewall rules for self-reachability"
+}
+
+variable "world_reachable_name" {
+  type        = string
+  default     = null
+  description = "Name of firewall rules for world-reachability"
+}
