@@ -23,6 +23,7 @@ resource "random_pet" "prefix" {
 resource "google_compute_firewall" "self-reachable" {
   name    = coalesce(var.self_reachable_name, "${local.prefix}-self-reachable")
   network = var.network
+  count   = var.self_reachable != null ? 1 : 0
 
   dynamic "allow" {
     for_each = length(var.self_reachable) > 0 ? var.self_reachable : local.default_allow
