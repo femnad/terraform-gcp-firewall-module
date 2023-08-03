@@ -38,7 +38,7 @@ resource "google_compute_firewall" "self-reachable" {
 }
 
 resource "google_compute_firewall" "world-reachable" {
-  name    = coalasce(var.world_reachable_name, "${local.prefix}-world-reachable")
+  name    = coalesce(var.world_reachable_name, "${local.prefix}-world-reachable")
   network = var.network
   count   = var.world_reachable != null ? 1 : 0
 
