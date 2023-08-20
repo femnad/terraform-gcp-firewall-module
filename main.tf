@@ -14,10 +14,11 @@ locals {
       ip = cidrhost(local.ip_prefix, host)
     }...
   }
-  prefix = length(var.prefix) > 0 ? var.prefix : "${random_pet.prefix.id}"
+  prefix = length(var.prefix) > 0 ? var.prefix : "${random_pet.prefix[0].id}"
 }
 
 resource "random_pet" "prefix" {
+  count = var.prefix == "" ? 1 : 0
 }
 
 resource "google_compute_firewall" "self-reachable" {
