@@ -16,11 +16,14 @@ self_reachable = {
 }
 ```
 
-* `world_reachable`: A mapping of ports to protocol which should be reachable from everywhere
+* `world_reachable`: A mapping of ports to protocol which should be reachable from given IP addresses (or everywhere if no IPs are specified)
 
 ```
 world_reachable = {
-  "80,443" = "tcp"
+  port_map = {
+    "80,443" = "tcp"
+  }
+  remote_ips = ["1.2.3.4/32"]
 }
 ```
 
